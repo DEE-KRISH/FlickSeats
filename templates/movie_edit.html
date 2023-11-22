@@ -1,0 +1,65 @@
+{% extends "movie_base.html" %}
+{% block title %}
+Booking page
+{% endblock title %}
+{% block body %}
+<div class='container mt-4'>
+<div class='row'>
+<div class='col-md-4'></div>
+<div class='col-md-4'>
+<br>
+    <h4 class='text-center bg-danger text-white'>Update your booking</h4>
+<br> 
+    {% with messages=get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category,message in messages %}
+    <div class='alert alert-{{category}} alert-dismissible fade show' role='alert'>
+        {{message}}
+        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+            <span aria-hidden='true'>&times;</span>
+        </button>
+    </div>  
+    <div class="card" style="width: 18rem;"></div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <form action='/edit/{{books.Bid}}' method='POST' class='jumbotron'>
+        <div class="form-group">
+            <select class="form-control" id="movie" value="{{books.Title}}" name="movie"  required>
+                <option selected>Select Movie</option>
+                {% for movie in movies  %}
+                    <option value="{{movie.Title}}">{{movie.Title}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <select class="form-control" id="theater" value="{{books.Name}}" name="theater"  required>
+                <option selected>Select Theater</option>
+                {% for theater in theaters  %}
+                    <option value="{{theater.Name}}">{{theater.Name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <select class="form-control" id="screen" value="{{book.ScreenNumber}}" name="screen"  required>
+                <option selected>Select Screen</option>
+                {% for screen in range(1,4)  %}
+                    <option value="{{screen}}">{{screen}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <select class="form-control" id="seat" value="{{book.SeatNumber}}" name="seat"  required>
+                <option selected>Select Seat</option>
+                {% for seat in range(1,11)  %}
+                    <option value="{{seat}}">{{seat}}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-success btn-sm btn-block">Update</button>
+    </form>
+</div>
+</div>
+</div>
+{% endblock body %}

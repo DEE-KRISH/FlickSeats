@@ -1,0 +1,53 @@
+{% extends "movie_base.html" %}
+{% block title %}
+Movies page
+{% endblock title %}
+{% block body %}
+{% with messages=get_flashed_messages(with_categories=true) %}
+{% if messages %}
+{% for category,message in messages %}
+<div class='alert alert-{{category}} alert-dismissible fade show' role='alert'>
+  {{message}}
+  <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+    <span aria-hidden='true'>&times;</span>
+  </button>
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+<div class="btn-group mb-3" role="group" aria-label="Min and Max Buttons">
+  <button type="button" class="btn btn-secondary" id="minButton">Min</button>
+  <button type="button" class="btn btn-secondary" id="maxButton">Max</button>
+</div>
+<table class="table">
+    <thead class='thead-light'>
+      <tr>
+        <th scope="col">Title</th>
+        <th scope="col">Genre</th>
+        <th scope="col">ReleaseDate</th>
+        <th scope="col">Director</th>
+        <th scope="col">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for movie in movies %}
+        <tr>
+            <th scope="row">{{ movie.Title }}</th>
+            <td>{{ movie.Genre }}</td>
+            <td>{{ movie.ReleaseDate }}</td>
+            <td>{{ movie.Director }}</td>
+            <td>{{ movie.Description }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<script>
+  document.getElementById('minButton').addEventListener('click', function () {
+    window.location.href = "/min_page"; 
+  });
+
+  document.getElementById('maxButton').addEventListener('click', function () {
+    window.location.href = "/max_page"; 
+  });
+</script>
+{% endblock body %}

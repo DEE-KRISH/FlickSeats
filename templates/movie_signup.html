@@ -1,0 +1,61 @@
+{% extends "movie_base.html" %}
+{% block title %}
+signup page
+{% endblock title %}
+{% block body %}
+<div class='container'>
+  <div class='row'>
+    <div class='col-md-4'></div>
+    <div class='col-md-4 jumbotron'>
+      <h4 class='text-center'>Sign up form</h4>
+      <br>
+      {% with messages=get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+      {% for category,message in messages %}
+      <div class='alert alert-{{category}} alert-dismissible fade show' role='alert'>
+        {{message}}
+        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+          <span aria-hidden='true'>&times;</span>
+        </button>
+      </div>
+      {% endfor %}
+      {% endif %}
+      {% endwith %}
+      <form action='/signup' method='POST'>
+        <div class="form-group">
+          <label for="FirstName">First name</label>
+          <input type="text" class="form-control" id="FirstName" placeholder="FirstName" name='FirstName' required>
+        </div>
+        <div class="form-group">
+          <label for="LastName">Last name</label>
+          <input type="text" class="form-control" id="LastName" placeholder="LastName" name='LastName' required>
+        </div>
+        <div class="form-group">
+            <label for="Email">Email address</label>
+            <input type="Email" class="form-control" id="Email" name='Email' aria-describedby="emailHelp" placeholder="Enter email">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+        <div class="form-group">
+            <label for="Phone">Phone number</label>
+            <input type="tel" class="form-control" id="Phone" name='Phone' placeholder="Enter Phone">
+        </div>
+        <div class="form-group">
+            <label for="Wallet">Wallet</label>
+            <input type="text" class="form-control" id="Wallet" name='Wallet' placeholder="Enter Wallet">
+        </div>
+        <div class="form-group">
+          <label for="Password1">Password</label>
+          <input type="password" class="form-control" id="Password1" placeholder="Password" name='password' required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-sm btn-block">sign up</button>
+      </form>
+      <br>
+      <p> Already a Customer?</p>
+      <a href='/login'> LOG IN</a>
+    </div>
+    <div class='col-md-4'></div>
+    </div>
+</div>
+
+
+{% endblock body %}
